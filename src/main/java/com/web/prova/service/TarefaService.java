@@ -19,7 +19,7 @@ public class TarefaService {
     }
 
 
-    public Tarefa criarTarefa(Tarefa tarefa) throws Exception {
+    public Tarefa criarTarefa(Tarefa tarefa) {
         tarefas.add(tarefa);
         return tarefa;
     }
@@ -29,12 +29,12 @@ public class TarefaService {
     }
 
     public Tarefa buscarTarefa(Long codigo) throws Exception {
-        Optional<Tarefa> tarefa = tarefas.stream().filter
+        Optional<Tarefa> tarefaOptional = tarefas.stream().filter
                 (e -> e.getCodigo().equals(codigo)).findFirst();
-        if(tarefa.isPresent()){
-            return tarefa.get();
+        if(tarefaOptional.isPresent()){
+            return tarefaOptional.get();
         } else {
-            throw new Exception("Tarefa não encontrado!");
+            throw new Exception("Tarefa não encontrada!");
         }
     }
 
@@ -46,7 +46,7 @@ public class TarefaService {
             tarefaOptional.get().setNome(tarefa.getNome());
             return tarefaOptional.get();
         } else {
-            throw new Exception("Tarefa não encontrado!");
+            throw new Exception("Tarefa não encontrada!");
         }
     }
     public void removerTarefa(Long codigo) {
